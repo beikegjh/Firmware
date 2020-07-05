@@ -117,7 +117,7 @@ bool FlightTaskOrbit::setRadius(float r)
 
 	// small radius is more important than high velocity for safety
 	if (!checkAcceleration(r, _v, _acceleration_max)) {
-		_v = math::sign(_v) * sqrtf(_acceleration_max * r);
+		_v = sign(_v) * sqrtf(_acceleration_max * r);
 	}
 
 	_r = r;
@@ -162,7 +162,7 @@ bool FlightTaskOrbit::activate(vehicle_local_position_setpoint_s last_setpoint)
 bool FlightTaskOrbit::update()
 {
 	// update altitude
-	FlightTaskManualAltitudeSmooth::update();
+	bool ret = FlightTaskManualAltitudeSmooth::update();
 
 	// stick input adjusts parameters within a fixed time frame
 	const float r = _r - _sticks_expo(0) * _deltatime * (_radius_max / 8.f);
@@ -186,7 +186,7 @@ bool FlightTaskOrbit::update()
 	// publish information to UI
 	sendTelemetry();
 
-	return true;
+	return ret;
 }
 
 void FlightTaskOrbit::generate_circle_approach_setpoints()

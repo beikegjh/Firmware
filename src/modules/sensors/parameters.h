@@ -56,7 +56,11 @@ struct Parameters {
 
 	float board_offset[3];
 
-	float baro_qnh;
+	//parameters for current/throttle-based mag compensation
+	int32_t mag_comp_type;
+	float mag_comp_paramX[4];
+	float mag_comp_paramY[4];
+	float mag_comp_paramZ[4];
 
 	int32_t air_cmodel;
 	float air_tube_length;
@@ -73,7 +77,10 @@ struct ParameterHandles {
 
 	param_t board_offset[3];
 
-	param_t baro_qnh;
+	param_t mag_comp_type;
+	param_t mag_comp_paramX[4];
+	param_t mag_comp_paramY[4];
+	param_t mag_comp_paramZ[4];
 
 	param_t air_cmodel;
 	param_t air_tube_length;
